@@ -11,12 +11,12 @@ COPY . .
 RUN make install
 
 FROM base-image AS production-image
-COPY crackme_bin/crackme3.tgz /usr/local/bin/crackme3.tgz
-RUN chmod 751 /usr/local/bin/crackme3.tgz
+COPY crackme_bin/keygenme /usr/local/bin/keygenme
+RUN chmod 751 /usr/local/bin/keygenme
 WORKDIR /home/crackme/
 # RUN python3 -m site # if this ever breaks to get dist-packages folder.
 COPY --from=compile-image /usr/local/lib/python3.10/dist-packages/ /usr/local/lib/python3.10/dist-packages/
 COPY --from=compile-image /usr/local/bin/crackme_yet_another_keygenme_crackme /usr/local/bin/
 
 USER crackme
-CMD crackme3.tgz
+CMD keygenme
